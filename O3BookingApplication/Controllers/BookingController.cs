@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Maintenance.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -13,16 +14,34 @@ namespace O3BookingApp.Controllers
     public class BookingController : Controller
     {
 
+      
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
         public IActionResult AddService(Service service)
         {
 
+            Task.FromResult(0);
+            var client = new MongoClient("mongodb://192.168.0.2:27017");
+            var database = client.GetDatabase("user");
+            var collec = database.GetCollection<BsonDocument>("Service");
+            var document = new BsonDocument
+                    {
+                     {"Duration",service.Duration },
+                     {"ServiceName",service.ServiceName },
+                     {"Prize",service.Prize },
+                     {"Image",service.Image },
+                     {"Description",service.Description }
 
-            return View();
+
+                  };
+
+            collec.InsertOneAsync(document);
+
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult BookingForm()

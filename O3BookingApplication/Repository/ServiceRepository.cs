@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using MongoDB.Bson;
+using MongoDB.Driver;
 namespace Maintenance.Repository
 {
     public class ServiceRepository:IServiceRepository
@@ -17,10 +18,7 @@ namespace Maintenance.Repository
             _context = new ObjectContext(settings);
         }
 
-        Task IServiceRepository.Add(Service Service)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         Task<IEnumerable<Service>> IServiceRepository.Get()
         {
@@ -30,6 +28,12 @@ namespace Maintenance.Repository
         Task<Service> IServiceRepository.Get(string id)
         {
             throw new NotImplementedException();
+        }
+
+      
+        public async Task Add(Service service)
+        {
+
         }
     }
 }
