@@ -12,7 +12,9 @@ namespace O3BookingApplication.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("Id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
+        [BsonElement("SerialNo")]
+        public int SerailNo { get; set; }
         [BsonElement("Name")]
         public string Name { get; set; }
         [BsonElement("Email")]
